@@ -29,4 +29,19 @@ public class CubeController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //衝突したオブジェクトを取得
+        GameObject collisionObject = collision.gameObject;
+        //CubeかGroundに当たった時に音を鳴らす
+        //Cubeの時は位置が上のキューブだけ音を鳴らす（2重に鳴るので）
+        if((collisionObject.tag == TagName.CubeTag && this.transform.position.y >= collisionObject.transform.position.y)
+            || collisionObject.tag == TagName.GroundTag)
+        {
+            //音を鳴らす
+            GetComponent<AudioSource>().Play();
+
+        }
+    }
 }
